@@ -98,10 +98,7 @@
             </div>
             <header class="text-center mb-10">
                 <div class="flex justify-center items-center gap-4 mb-2">
-                    <svg class="w-12 h-12" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="50" fill="var(--carta-da-zucchero)"/>
-                        <path d="M26.44 78.52V35.98H37.56L50.22 55.42L62.88 35.98H74V78.52H65.3V49.42L53.76 67.3H46.68L35.14 49.42V78.52H26.44ZM50.22 62.98C53.54 62.98 56.24 61.9267 58.32 59.82C60.4 57.7133 61.44 55.0933 61.44 51.96C61.44 48.8267 60.4 46.2067 58.32 44.1C56.24 41.9933 53.54 40.94 50.22 40.94C46.9 40.94 44.2 41.9933 42.12 44.1C40.04 46.2067 39 48.8267 39 51.96C39 55.0933 40.04 57.7133 42.12 59.82C44.2 61.9267 46.9 62.98 50.22 62.98Z" fill="var(--ottanio)"/>
-                    </svg>
+                    <div id="logo-container"></div>
                     <h1 class="text-3xl font-bold" style="color: var(--carta-da-zucchero);" id="welcome-title"></h1>
                 </div>
                 <p style="color: var(--carta-da-zucchero);" class="opacity-80" id="welcome-subtitle"></p>
@@ -117,6 +114,282 @@
 
     </div>
 
-    <script src="app.js"></script>
-</body>
-</html>
+    <script>
+        const logoHtml = `<img src="2emme_logo short_green_RGB.png" class="w-12 h-12" alt="Logo 2EMME">`;
+
+        const allGuidesData = {
+            ristoranti: {
+                it: {
+                    homepage: {
+                        title: "Guida Ristoranti",
+                        subtitle: "Milano",
+                        buttons: {
+                            tradizionali: "🍽️ Tradizionali",
+                            etnici: "🌍 Etnici",
+                            moda: "✨ Alla Moda",
+                            pizzerie: "🍕 Pizzerie",
+                            vegani: "🌱 Vegani e Vegetariani",
+                            suggerimenti: "💡 Itinerari Suggeriti"
+                        }
+                    },
+                    pages: {
+                        tradizionali: {
+                            title: "Ristoranti Tradizionali",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Al Garghet", details: "Cotoletta alla Milanese spessa con l'osso. Atmosfera rurale e romantica, ideale per un'occasione speciale.", dates: "50-70€" },
+                                { name: "La Pobbia 1850", details: "Risotto giallo con Ossobuco in gremolada. Bib Gourmand Michelin. Un'istituzione storica per la cucina milanese autentica.", dates: "60-80€" },
+                                { name: "Premiata Trattoria Arlati", details: "Ossobuco con riso al salto. Ambiente artistico e bohémien unico, con solidi classici a prezzi vantaggiosi.", dates: "45-60€" },
+                                { name: "Antica Trattoria della Pesa", details: "Risotto alla milanese, Cotoletta. Storica trattoria milanese che offre un'esperienza tradizionale e affidabile.", dates: "55-90€" },
+                                { name: "Trippa", details: "Piatti a base di quinto quarto, menù stagionale. Osteria moderna molto richiesta, apprezzata per la creatività e la qualità delle materie prime.", dates: "40-60€" }
+                            ]
+                        },
+                        etnici: {
+                            title: "Ristoranti Etnici",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Ichikawa", details: "Menù Omakase. Giapponese (Alta Cucina). Per veri intenditori.", dates: "120-150€+" },
+                                { name: "Shiro Poporoya", details: "Chirashi. Giapponese (Tradizionale). Un'istituzione leggendaria.", dates: "35-50€" },
+                                { name: "Pacifico", details: "Ceviche Puro, Cocktail al Pisco. Peruviana (Nikkei). Trendy, cucina innovativa.", dates: "70-90€" },
+                                { name: "Serendib", details: "Menù Degustazione. Indiana / Sri Lankese. Bib Gourmand Michelin.", dates: "30-40€" },
+                                { name: "Tara", details: "Tandoori Misto, Chicken Tikka Masala. Indiana. Affidabile e con ottime recensioni.", dates: "20-25€" },
+                                { name: "Mezè", details: "Mezè da condividere, Pane Saj. Libanese. Concept autentico e moderno.", dates: "50-70€" },
+                                { name: "Warsà", details: "Zighinì (piatto conviviale). Eritrea. Storico e mitico locale eritreo.", dates: "25-35€" }
+                            ]
+                        },
+                        moda: {
+                            title: "Ristoranti 'Alla Moda'",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Enrico Bartolini al Mudec", details: "Menù Degustazione. 3 Stelle Michelin. Il vertice assoluto della gastronomia milanese.", dates: "240€+" },
+                                { name: "Cracco in Galleria", details: "Cucina d'Autore. 1 Stella Michelin. Location iconica e innovazione.", dates: "210€" },
+                                { name: "Berton", details: "Cucina Moderna. 1 Stella Michelin. Eleganza minimalista e cucina tecnica.", dates: "180€" },
+                                { name: "Autem*", details: "Cucina di Mercato (Carta Bianca). 1 Stella Michelin. Approccio moderno e dinamico.", dates: "95€+ (à la carte)" },
+                                { name: "Stendhal Milano", details: "Bistrot Milanese / Classici Rivisitati. Hotspot della Fashion Week, atmosfera chic.", dates: "60-90€ (à la carte)" }
+                            ]
+                        },
+                        pizzerie: {
+                            title: "Pizzerie",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Assaje", details: "Pizza 'Assaje' (zucca e gamberi). Napoletana Tradizionale. Popolare e vivace.", dates: "12-18€" },
+                                { name: "Dry Milano", details: "The Bengal Shrimp, 5 Formaggi. Gourmet & Cocktail Pairing. Icona di stile.", dates: "16-28€" },
+                                { name: "Crosta", details: "Impasti di alta qualità. Contemporanea / Da Panificio. Gambero Rosso (Tre Spicchi).", dates: "15-25€" },
+                                { name: "Giolina", details: "Topping di alta qualità. Napoletana Contemporanea. Ambiente di design.", dates: "14-20€" },
+                                { name: "Lievità", details: "Leggerezza e digeribilità. Napoletana Gourmet. Ricerca sugli impasti.", dates: "13-19€" },
+                                { name: "Gino Sorbillo", details: "Margherita. Classica Napoletana. Una vera istituzione.", dates: "10-15€" }
+                            ]
+                        },
+                        vegani: {
+                            title: "Vegani e Vegetariani",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Joia", details: "Alta cucina vegetariana. Unica stella Michelin vegetariana in Europa. Un'esperienza gastronomica indimenticabile guidata dallo chef Pietro Leemann.", dates: "100€+" },
+                                { name: "Linfa", details: "Fine dining vegetale. Eleganza e creatività in ogni piatto. Un'atmosfera sofisticata perfetta per un'occasione speciale.", dates: "60-80€" },
+                                { name: "Soulgreen", details: "Plant-based. Locale di design in zona Porta Nuova. Ideale per un pasto sano, gustoso e molto 'instagrammabile'.", dates: "25-40€" },
+                                { name: "Flower Burger", details: "Burger vegani colorati e patatine speziate. Divertente, informale e incredibilmente saporito. Un concept unico che ha conquistato la città.", dates: "15-25€" }
+                            ]
+                        },
+                        suggerimenti: {
+                            title: "Itinerari Suggeriti",
+                            itineraries: [
+                                { title: "Un Giorno da Milanese DOC", description: "Un'immersione nella tradizione. Iniziate con un pranzo da La Pobbia 1850 per assaporare i classici in un contesto storico. Per cena, scegliete l'atmosfera artistica della Premiata Trattoria Arlati, dove la storia meneghina incontra la cultura." },
+                                { title: "Giro del Mondo in 48 Ore", description: "Un weekend cosmopolita. Il primo giorno, dedicatevi all'Asia: un pranzo da Shiro Poporoya per un chirashi leggendario e una cena da Ichikawa per un'esperienza omakase indimenticabile. Il secondo giorno, esplorate altri continenti: un pranzo conviviale da Mezè per assaporare la cucina libanese e una cena vibrante da Pacifico per scoprire la fusione Nikkei." },
+                                { title: "Serata Glamour", description: "Per una notte sotto i riflettori. La scelta d'elezione è una cena da Autem*, dove l'innovazione dello chef Natalini si sposa con un'eleganza moderna. In alternativa, per un'atmosfera da salotto buono nel cuore di Brera, Stendhal Milano è una garanzia." },
+                                { title: "Il Pellegrinaggio della Pizza", description: "Un tour comparativo per veri appassionati. Iniziate con l'autenticità napoletana di Assaje per pranzo. Per cena, immergetevi nell'esperienza unica di pizza e cocktail da Dry Milano. Il giorno seguente, puntate all'eccellenza assoluta degli impasti con una visita da Crosta." }
+                            ]
+                        }
+                    }
+                },
+                en: {
+                    homepage: {
+                        title: "Milan Restaurant Guide",
+                        subtitle: "Milan",
+                        buttons: {
+                            tradizionali: "🍽️ Traditional",
+                            etnici: "🌍 Ethnic",
+                            moda: "✨ Trendy",
+                            pizzerie: "🍕 Pizzerias",
+                            vegani: "🌱 Vegan & Vegetarian",
+                            suggerimenti: "💡 Suggested Itineraries"
+                        }
+                    },
+                    pages: {
+                        tradizionali: {
+                            title: "Traditional Restaurants",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Al Garghet", details: "Thick bone-in Cotoletta alla Milanese. Rustic and romantic atmosphere, ideal for a special occasion.", dates: "50-70€" },
+                                { name: "La Pobbia 1850", details: "Yellow Risotto with Ossobuco in gremolada. Michelin Bib Gourmand. A historic institution for authentic Milanese cuisine.", dates: "60-80€" },
+                                { name: "Premiata Trattoria Arlati", details: "Ossobuco with risotto al salto. Unique artistic and bohemian setting, with solid classics at good prices.", dates: "45-60€" },
+                                { name: "Antica Trattoria della Pesa", details: "Risotto alla milanese, Cotoletta. Historic Milanese trattoria offering a reliable and traditional experience.", dates: "55-90€" },
+                                { name: "Trippa", details: "Offal-based dishes, seasonal menu. A very popular modern osteria, appreciated for its creativity and quality ingredients.", dates: "40-60€" }
+                            ]
+                        },
+                        etnici: {
+                            title: "Ethnic Restaurants",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Ichikawa", details: "Omakase Menu. Japanese (Haute Cuisine). For true connoisseurs.", dates: "120-150€+" },
+                                { name: "Shiro Poporoya", details: "Chirashi. Japanese (Traditional). A legendary institution.", dates: "35-50€" },
+                                { name: "Pacifico", details: "Pure Ceviche, Pisco Cocktail. Peruvian (Nikkei). Trendy, innovative cuisine.", dates: "70-90€" },
+                                { name: "Serendib", details: "Tasting Menu. Indian / Sri Lankan. Michelin Bib Gourmand.", dates: "30-40€" },
+                                { name: "Tara", details: "Mixed Tandoori, Chicken Tikka Masala. Indian. Reliable with excellent reviews.", dates: "20-25€" },
+                                { name: "Mezè", details: "Mezè to share, Saj Bread. Lebanese. Authentic and modern concept.", dates: "50-70€" },
+                                { name: "Warsà", details: "Zighinì (communal dish). Eritrean. A historic and mythical Eritrean restaurant.", dates: "25-35€" }
+                            ]
+                        },
+                        moda: {
+                            title: "Trendy Restaurants",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Enrico Bartolini al Mudec", details: "Tasting Menu. 3 Michelin Stars. The absolute peak of Milanese gastronomy.", dates: "240€+" },
+                                { name: "Cracco in Galleria", details: "Signature Cuisine. 1 Michelin Star. Iconic location and innovation.", dates: "210€" },
+                                { name: "Berton", details: "Modern Cuisine. 1 Michelin Star. Minimalist elegance and technical cuisine.", dates: "180€" },
+                                { name: "Autem*", details: "Market Cuisine (Carte Blanche). 1 Michelin Star. Modern and dynamic approach.", dates: "95€+ (à la carte)" },
+                                { name: "Stendhal Milano", details: "Milanese Bistrot / Reimagined Classics. Fashion Week hotspot, chic atmosphere.", dates: "60-90€ (à la carte)" }
+                            ]
+                        },
+                        pizzerie: {
+                            title: "Pizzerias",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Assaje", details: "Pizza 'Assaje' (pumpkin and shrimp). Traditional Neapolitan. Popular and lively.", dates: "12-18€" },
+                                { name: "Dry Milano", details: "The Bengal Shrimp, 5 Cheeses. Gourmet & Cocktail Pairing. A style icon.", dates: "16-28€" },
+                                { name: "Crosta", details: "High-quality doughs. Contemporary / Bakery-style. Gambero Rosso (Tre Spicchi).", dates: "15-25€" },
+                                { name: "Giolina", details: "High-quality toppings. Contemporary Neapolitan. Designer ambiance.", dates: "14-20€" },
+                                { name: "Lievità", details: "Lightness and digestibility. Gourmet Neapolitan. Research on doughs.", dates: "13-19€" },
+                                { name: "Gino Sorbillo", details: "Margherita. Classic Neapolitan. A true institution.", dates: "10-15€" }
+                            ]
+                        },
+                        vegani: {
+                            title: "Vegan & Vegetarian",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Joia", details: "Haute vegetarian cuisine. The only vegetarian Michelin star in Europe. An unforgettable gastronomic experience led by chef Pietro Leemann.", dates: "100€+" },
+                                { name: "Linfa", details: "Plant-based fine dining. Elegance and creativity in every dish. A sophisticated atmosphere perfect for a special occasion.", dates: "60-80€" },
+                                { name: "Soulgreen", details: "Plant-based. Designer venue in Porta Nuova. Ideal for a healthy, tasty, and very 'instagrammable' meal.", dates: "25-40€" },
+                                { name: "Flower Burger", details: "Colorful vegan burgers and spiced fries. Fun, informal, and incredibly flavorful. A unique concept that has taken the city by storm.", dates: "15-25€" }
+                            ]
+                        },
+                        suggerimenti: {
+                            title: "Suggested Itineraries",
+                            itineraries: [
+                                { title: "A Day as a True Milanese", description: "An immersion in tradition. Start with a lunch at La Pobbia 1850 to savor the classics in a historic setting. For dinner, choose the artistic atmosphere of Premiata Trattoria Arlati, where Milanese history meets culture." },
+                                { title: "World Tour in 48 Hours", description: "A cosmopolitan weekend. On day one, focus on Asia: a legendary chirashi lunch at Shiro Poporoya and an unforgettable omakase dinner at Ichikawa. On day two, explore other continents: a communal Lebanese lunch at Mezè and a vibrant dinner at Pacifico to discover Nikkei fusion." },
+                                { title: "Glamorous Evening", description: "For a night in the spotlight. The top choice is a dinner at Autem*, where Chef Natalini's innovation meets modern elegance. Alternatively, for a chic lounge atmosphere in the heart of Brera, Stendhal Milano is a sure bet." },
+                                { title: "The Pizza Pilgrimage", description: "A comparative tour for true enthusiasts. Start with the Neapolitan authenticity of Assaje for lunch. For dinner, dive into the unique experience of pizza and cocktails at Dry Milano. The next day, aim for the absolute excellence of doughs with a visit to Crosta." }
+                            ]
+                        }
+                    }
+                }
+            },
+            settembre: {
+                it: {
+                    homepage: {
+                        title: "Guida Settembre",
+                        subtitle: "Milano",
+                        buttons: {
+                            musica: "🎵 Musica & Concerti",
+                            cultura: "🏛️ Mostre & Cultura",
+                            moda: "✨ Moda & Design",
+                            sport: "⚽ Eventi Sportivi",
+                            insolito: "✨ Insolito & Esclusivo",
+                            itinerari: "💡 Itinerari Suggeriti"
+                        }
+                    },
+                    pages: {
+                        musica: {
+                            title: "Musica & Concerti",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { 
+                                    name: "Tananai", 
+                                    details: "Il popolare cantautore si esibirà all'Ippodromo SNAI San Siro. I biglietti partono da 49,00 € per il posto unico e da 59,00 € per il posto in piedi 'PIT'.", 
+                                    dates: "05/09/2025, ore 21:00.",
+                                    address: "Ippodromo SNAI San Siro, Piazzale dello Sport, 16, Milano."
+                                },
+                                { 
+                                    name: "Salmo", 
+                                    details: "Concerto rap alla Fiera Milano Live. I biglietti per Salmo partono da 44,85 €.", 
+                                    dates: "06/09/2025.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
+                                },
+                                { 
+                                    name: "Emis Killa", 
+                                    details: "Il concerto di Emis Killa è in programma alla Fiera Milano Live, una delle nuove venue per la musica dal vivo.", 
+                                    dates: "10/09/2025.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
+                                },
+                                { 
+                                    name: "Sfera Ebbasta & Shiva", 
+                                    details: "Un unico spettacolo con due grandi nomi del rap italiano alla Fiera Milano Live, con biglietti a partire da 57,50 €.", 
+                                    dates: "13/09/2025, ore 21:00.",
+                                    address: "Fiera Milano Live, Rho (Milano)."
+                                },
+                                { 
+                                    name: "Ghali", 
+                                    details: "Il suo show-evento 'Gran Teatro' promette uno spettacolo unico alla Fiera Milano Live, con biglietti a partire da 43,70 €.", 
+                                    dates: "20/09/2025, ore 21:00.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
+                                },
+                                { 
+                                    name: "The Offspring", 
+                                    details: "La band punk rock si esibirà all'Unipol Forum.", 
+                                    dates: "29/09/2025.",
+                                    address: "Unipol Forum, Via G. di Vittorio, 6, Assago (MI)."
+                                },
+                                {
+                                    name: "Mito SettembreMusica",
+                                    details: "Festival di musica classica in varie location storiche della città. La maggior parte dei concerti ha un costo e si svolge in location storiche.",
+                                    dates: "Tutto il mese di settembre.",
+                                    address: "Varie location, come il Teatro Dal Verme o la Chiesa di San Giovanni Battista alla Creta."
+                                }
+                            ]
+                        },
+                        cultura: {
+                            title: "Mostre & Cultura",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Man Ray - Forme di Luce", details: "Una grande retrospettiva dedicata a uno dei geni più eclettici del XX secolo aprirà al Palazzo Reale.", dates: "Dal 20/09/2025", address: "Palazzo Reale, Piazza del Duomo, 12, Milano." },
+                                { name: "Mario Giacomelli - Il fotografo e il poeta", details: "Una retrospettiva nel centenario della nascita di Giacomelli si conclude a Palazzo Reale.", dates: "Fino al 07/09/2025", address: "Palazzo Reale, Piazza del Duomo, 12, Milano." },
+                                { name: "Una Collezione Inattesa", details: "Un percorso sull'arte italiana degli anni Sessanta.", dates: "Fino al 05/10/2025", address: "Gallerie d'Italia, Piazza della Scala, 6, Milano." },
+                                { name: "Inequalities - 24ª Esposizione Internazionale", details: "Una mostra che esplora le disuguaglianze globali attraverso arte, design e architettura.", dates: "Fino al 09/11/2025", address: "Triennale di Milano, Viale Emilio Alemagna, 6, Milano." }
+                            ]
+                        },
+                        moda: {
+                            title: "Moda & Design",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Milano Fashion Week Women's", details: "La settimana della moda si svolge in diverse location. Alcuni eventi, come quelli del Fashion Hub a Palazzo Giureconsulti, sono aperti al pubblico e gratuiti, ma spesso richiedono la registrazione.", dates: "23 - 29 Settembre.", address: "Diversi luoghi in città." },
+                                { name: "Milano Fashion&Jewels", details: "Un evento fieristico dedicato ad accessori e gioielli.", dates: "20 - 23 Settembre.", address: "Fiera Milano, Rho (Milano)." },
+                                { name: "Milano Beauty Week", details: "Una settimana dedicata a profumi, cosmetica e benessere, con un ricco calendario di eventi.", dates: "17 - 21 Settembre.", address: "Varie location in città." }
+                            ]
+                        },
+                        sport: {
+                            title: "Eventi Sportivi",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Formula 1 Gran Premio d'Italia", details: "L'Autodromo Nazionale di Monza ospiterà la 96ª edizione del Gran Premio.", dates: "05 - 07 Settembre.", address: "Autodromo Nazionale di Monza, Viale di Vedano, 5, Monza (MB)." },
+                                { name: "Giornata dello Sport", details: "Un evento gratuito con la partecipazione di diverse associazioni sportive.", dates: "21 Settembre.", address: "Parco Nord, Via Claudio Treves, 1, Cinisello Balsamo (MI)." }
+                            ]
+                        },
+                        insolito: {
+                            title: "Insolito & Esclusivo",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Visita a Villa Necchi Campiglio", details: "Un gioiello dell'Art Déco con la prima piscina privata di Milano, perfetto per un'esperienza d'arte esclusiva.", dates: "Mart-Dom: 10:00 - 18:00.", address: "Via Mozart, 14, Milano." },
+                                { name: "Tour della Milano Sotterranea", details: "Esplora aree archeologiche nascoste, come la Cripta di San Sepolcro o la Cripta di San Giovanni in Conca, con tour di 90-120 minuti. Il costo parte da 33,00 €.", dates: "Variabili, su prenotazione.", address: "Varie location." },
+                                { name: "Candlelight Concerts", details: "Concerti a lume di candela in location suggestive per un'atmosfera intima e magica.", dates: "Variabili, da verificare online.", address: "Varie location, come Villa Clerici." },
+                                { name: "Bagni Misteriosi", details: "Una storica piscina riqualificata che offre un'atmosfera suggestiva, quasi teatrale. È possibile nuotare e prendere il sole, con ingresso a pagamento.", dates: "Variabili.", address: "Via Carlo Botta, 18, Milano." },
+                                { name: "Degustazione vini privata", details: "Tour privato con un sommelier per una degustazione di vini italiani in un'enoteca esclusiva. Il costo parte da circa 88 € a persona.", dates: "Variabili, su prenotazione.", address: "Vari luoghi, da definire in base alla prenotazione." }
+                            ]
+                        },
+                        itinerari: {
+                            title: "Itinerari Suggeriti",
+                            itineraries: [
+                                { title: "Rientro in Musica", description: "Inizia il mese con i concerti di Salmo e Tananai, e per un'esperienza fuori porta, visita la Sagra dei Crotti a Chiavenna, che celebra i sapori e le tradizioni locali." },
+                                { title: "Tra Rap e Tradizione", description: "Un itinerario che unisce la cultura moderna dei concerti di Sfera Ebbasta & Shiva con la tradizione del festival del vino Eroico Rosso a Tirano." },
+                                { title: "Sotto i Riflettori della Moda", description: "Immergiti nell'atmosfera della Milano Fashion Week Women's, esplorando le vie del Quadrilatero della moda e partecipando agli eventi aperti al pubblico, previa registrazione." }
+                            ]
+                        }
