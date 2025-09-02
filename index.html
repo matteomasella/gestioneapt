@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Settembre Milano - 2EMME</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ottanio: #004D54;
+            --carta-da-zucchero: #BFEBFF;
+            --magenta: #DB4F61;
+            --verde: #54C4A6;
+            --bianco: #FFFFFF;
+            --nero: #000000;
+            --light-magenta: #F5C9D1;
+            --light-green: #CCEDE5;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--ottanio);
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .btn {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        .btn-category {
+            background-color: var(--carta-da-zucchero);
+            color: var(--ottanio);
+        }
+        .btn-suggestion {
+            background-color: var(--verde);
+            color: var(--bianco);
+        }
+        .btn-vegan {
+            background-color: var(--magenta);
+            color: var(--bianco);
+        }
+        .card {
+            background-color: var(--bianco);
+            color: var(--ottanio);
+            border-left: 5px solid var(--magenta);
+        }
+        .card-title {
+            color: var(--ottanio);
+            font-weight: 700;
+        }
+        .card-tag {
+            background-color: var(--light-magenta);
+            color: var(--magenta);
+            white-space: nowrap;
+        }
+        .btn-back {
+            background-color: var(--magenta);
+            color: var(--bianco);
+        }
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+        .lang-btn {
+            background-color: var(--carta-da-zucchero);
+            color: var(--ottanio);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+        .lang-btn.active {
+            background-color: var(--magenta);
+            color: var(--bianco);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-ottanio">
+
+    <div id="app-container" class="max-w-md mx-auto bg-ottanio min-h-screen">
+
+        <div id="home" class="page active p-6">
+            <div class="flex justify-end mb-4">
+                <button class="lang-btn active" data-lang="it">IT</button>
+                <button class="lang-btn ml-2" data-lang="en">EN</button>
+            </div>
+            <header class="text-center mb-10">
+                <div class="flex justify-center items-center gap-4 mb-2">
+                    <svg class="w-12 h-12" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="50" fill="var(--carta-da-zucchero)"/>
+                        <path d="M26.44 78.52V35.98H37.56L50.22 55.42L62.88 35.98H74V78.52H65.3V49.42L53.76 67.3H46.68L35.14 49.42V78.52H26.44ZM50.22 62.98C53.54 62.98 56.24 61.9267 58.32 59.82C60.4 57.7133 61.44 55.0933 61.44 51.96C61.44 48.8267 60.4 46.2067 58.32 44.1C56.24 41.9933 53.54 40.94 50.22 40.94C46.9 40.94 44.2 41.9933 42.12 44.1C40.04 46.2067 39 48.8267 39 51.96C39 55.0933 40.04 57.7133 42.12 59.82C44.2 61.9267 46.9 62.98 50.22 62.98Z" fill="var(--ottanio)"/>
+                    </svg>
+                    <h1 class="text-3xl font-bold" style="color: var(--carta-da-zucchero);"></h1>
+                </div>
+                <p id="subtitle" style="color: var(--carta-da-zucchero);" class="opacity-80"></p>
+            </header>
+            <main class="space-y-4" id="main-buttons">
+                </main>
+        </div>
+
+        <div id="page-content" class="page"></div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
