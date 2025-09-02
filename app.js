@@ -1,3 +1,5 @@
+const logoHtml = `<img src="2emme_logo short_green_RGB.png" class="w-12 h-12" alt="Logo 2EMME">`;
+
 const allGuidesData = {
     ristoranti: {
         it: {
@@ -350,7 +352,7 @@ const allGuidesData = {
                     ]
                 }
             }
-        },
+        }
     },
     nolo: {
         it: {
@@ -475,6 +477,7 @@ function loadGuide(guideId) {
 }
 
 function showWelcomePage() {
+    currentGuide = null;
     document.getElementById('guide-content').classList.remove('active');
     document.getElementById('welcome').classList.add('active');
     updateWelcomeUI();
@@ -497,7 +500,8 @@ function updateWelcomeUI() {
             nolo: "🗺️ NoLo Map"
         }
     };
-
+    
+    document.getElementById('logo-container').innerHTML = logoHtml;
     const textData = welcomeText[currentLang];
     document.getElementById('welcome-title').innerText = textData.title;
     document.getElementById('welcome-subtitle').innerText = textData.subtitle;
@@ -516,14 +520,25 @@ function updateGuideUI() {
         <div class="p-6 bg-white min-h-screen">
             <header class="flex items-center mb-6 pb-4 border-b">
                 <button onclick="showWelcomePage()" style="color:var(--magenta);" class="font-bold text-lg mr-4">${backButtonText}</button>
-                <h2 class="text-2xl font-bold text-ottanio">${guideData.homepage.title}</h2>
+                <div class="flex items-center gap-4">
+                    <div id="logo-container-guide">${logoHtml}</div>
+                    <h2 class="text-2xl font-bold text-ottanio">${guideData.homepage.title}</h2>
+                </div>
             </header>
             <main class="space-y-4">`;
     
     for (const key in guideData.homepage.buttons) {
         if (guideData.homepage.buttons.hasOwnProperty(key)) {
             const buttonText = guideData.homepage.buttons[key];
-            content += `<button onclick="showPage('${key}')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg">${buttonText}</button>`;
+            
+            let buttonClass = 'btn-category';
+            if (key.includes('itinerari') || key.includes('suggerimenti')) {
+                buttonClass = 'btn-suggestion';
+            } else if (key.includes('vegani') || key.includes('insolito')) {
+                buttonClass = 'btn-vegan';
+            }
+
+            content += `<button onclick="showPage('${key}')" class="w-full btn font-bold py-5 rounded-lg shadow-md text-lg ${buttonClass}">${buttonText}</button>`;
         }
     }
 
