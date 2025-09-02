@@ -1,4 +1,4 @@
-const logoHtml = `<img src="2emme_logo short_green_RGB.png" class="w-12 h-12" alt="Logo 2EMME">`;
+const logoHtml = `<img src="2emme_logo_monogram_green_RGB" class="w-12 h-12" alt="Logo 2EMME">`;
 
 const allGuidesData = {
     ristoranti: {
