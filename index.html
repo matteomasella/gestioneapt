@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guida Settembre Milano - 2EMME</title>
+    <title>Scegli la tua Guida - 2EMME Real Estate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +91,7 @@
 
     <div id="app-container" class="max-w-md mx-auto bg-ottanio min-h-screen">
 
-        <div id="home" class="page active p-6">
+        <div id="welcome" class="page active p-6">
             <div class="flex justify-end mb-4">
                 <button class="lang-btn active" data-lang="it">IT</button>
                 <button class="lang-btn ml-2" data-lang="en">EN</button>
@@ -102,15 +102,18 @@
                         <circle cx="50" cy="50" r="50" fill="var(--carta-da-zucchero)"/>
                         <path d="M26.44 78.52V35.98H37.56L50.22 55.42L62.88 35.98H74V78.52H65.3V49.42L53.76 67.3H46.68L35.14 49.42V78.52H26.44ZM50.22 62.98C53.54 62.98 56.24 61.9267 58.32 59.82C60.4 57.7133 61.44 55.0933 61.44 51.96C61.44 48.8267 60.4 46.2067 58.32 44.1C56.24 41.9933 53.54 40.94 50.22 40.94C46.9 40.94 44.2 41.9933 42.12 44.1C40.04 46.2067 39 48.8267 39 51.96C39 55.0933 40.04 57.7133 42.12 59.82C44.2 61.9267 46.9 62.98 50.22 62.98Z" fill="var(--ottanio)"/>
                     </svg>
-                    <h1 class="text-3xl font-bold" style="color: var(--carta-da-zucchero);"></h1>
+                    <h1 class="text-3xl font-bold" style="color: var(--carta-da-zucchero);" id="welcome-title"></h1>
                 </div>
-                <p id="subtitle" style="color: var(--carta-da-zucchero);" class="opacity-80"></p>
+                <p style="color: var(--carta-da-zucchero);" class="opacity-80" id="welcome-subtitle"></p>
             </header>
-            <main class="space-y-4" id="main-buttons">
-                </main>
+            <main class="space-y-4" id="welcome-buttons">
+                <button onclick="loadGuide('ristoranti')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-ristoranti"></button>
+                <button onclick="loadGuide('settembre')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-settembre"></button>
+                <button onclick="loadGuide('nolo')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-nolo"></button>
+            </main>
         </div>
 
-        <div id="page-content" class="page"></div>
+        <div id="guide-content" class="page"></div>
 
     </div>
 
