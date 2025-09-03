@@ -18,6 +18,7 @@
             --nero: #000000;
             --light-magenta: #F5C9D1;
             --light-green: #CCEDE5;
+            --blu-scuro: #004d54;
         }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -44,27 +45,21 @@
             background-color: var(--verde);
             color: var(--bianco);
         }
-        .btn-vegan {
+        .btn-special {
             background-color: var(--magenta);
             color: var(--bianco);
         }
         .card {
             background-color: var(--bianco);
             color: var(--ottanio);
-            border-left: 5px solid var(--magenta);
+            border-left: 5px solid var(--verde);
         }
         .card-title {
             color: var(--ottanio);
             font-weight: 700;
         }
-        .card-tag {
-            background-color: var(--light-magenta);
-            color: var(--magenta);
-            white-space: nowrap;
-        }
         .btn-back {
-            background-color: var(--magenta);
-            color: var(--bianco);
+            color: var(--ottanio);
         }
         .logo-svg {
             width: 50px;
@@ -78,12 +73,31 @@
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            opacity: 0.6;
+            opacity: 1;
+            transition: background-color 0.2s, color 0.2s;
         }
         .lang-btn.active {
-            background-color: var(--magenta);
+            background-color: var(--ottanio);
             color: var(--bianco);
-            opacity: 1;
+        }
+        .logo-container {
+            position: relative;
+            display: inline-block;
+        }
+        .logo-text {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            font-style: italic;
+            color: var(--magenta);
+            white-space: nowrap;
+        }
+        .logo-with-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -98,7 +112,10 @@
             </div>
             <header class="text-center mb-10">
                 <div class="flex justify-center items-center gap-4 mb-2">
-                    <div id="logo-container"></div>
+                    <div id="logo-container" class="logo-with-text">
+                        <img src="2emme_logo_ottanio BG_16x9_RGB.pdf" class="w-24 h-24 mb-4" alt="Logo 2EMME">
+                        <span class="text-xl italic font-semibold" style="color: var(--magenta);">Apartments</span>
+                    </div>
                     <h1 class="text-3xl font-bold" style="color: var(--carta-da-zucchero);" id="welcome-title"></h1>
                 </div>
                 <p style="color: var(--carta-da-zucchero);" class="opacity-80" id="welcome-subtitle"></p>
@@ -107,6 +124,8 @@
                 <button onclick="loadGuide('ristoranti')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-ristoranti"></button>
                 <button onclick="loadGuide('settembre')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-settembre"></button>
                 <button onclick="loadGuide('nolo')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-nolo"></button>
+                <button onclick="loadGuide('servizi')" class="w-full btn-special font-bold py-5 rounded-lg shadow-md text-lg" id="btn-servizi"></button>
+                <button onclick="loadGuide('riciclo')" class="w-full btn-category font-bold py-5 rounded-lg shadow-md text-lg" id="btn-riciclo"></button>
             </main>
         </div>
 
@@ -115,7 +134,7 @@
     </div>
 
     <script>
-        const logoHtml = `<img src="logo2mapt_nsf.png" class="w-12 h-12" alt="Logo 2EMME">`;
+        const logoHtml = `<img src="2emme_logo short_ottanio BG_1x1_RGB.pdf" class="w-12 h-12" alt="Logo 2EMME">`;
 
         const allGuidesData = {
             ristoranti: {
@@ -151,7 +170,7 @@
                                 { name: "Ichikawa", details: "Menù Omakase. Giapponese (Alta Cucina). Per veri intenditori.", dates: "120-150€+" },
                                 { name: "Shiro Poporoya", details: "Chirashi. Giapponese (Tradizionale). Un'istituzione leggendaria.", dates: "35-50€" },
                                 { name: "Pacifico", details: "Ceviche Puro, Cocktail al Pisco. Peruviana (Nikkei). Trendy, cucina innovativa.", dates: "70-90€" },
-                                { name: "Serendib", details: "Menù Degustazione. Indiana / Sri Lankese. Bib Gourmand Michelin.", dates: "30-40€" },
+                                { name: "Serendib", details: "Menù Degustazione. Indiana / Sri Lankese. Michelin Bib Gourmand.", dates: "30-40€" },
                                 { name: "Tara", details: "Tandoori Misto, Chicken Tikka Masala. Indiana. Affidabile e con ottime recensioni.", dates: "20-25€" },
                                 { name: "Mezè", details: "Mezè da condividere, Pane Saj. Libanese. Concept autentico e moderno.", dates: "50-70€" },
                                 { name: "Warsà", details: "Zighinì (piatto conviviale). Eritrea. Storico e mitico locale eritreo.", dates: "25-35€" }
@@ -303,39 +322,39 @@
                             title: "Musica & Concerti",
                             infoLabel: "Informazioni:",
                             activities: [
-                                { 
-                                    name: "Tananai", 
-                                    details: "Il popolare cantautore si esibirà all'Ippodromo SNAI San Siro. I biglietti partono da 49,00 € per il posto unico e da 59,00 € per il posto in piedi 'PIT'.", 
+                                {
+                                    name: "Tananai",
+                                    details: "Il popolare cantautore si esibirà all'Ippodromo SNAI San Siro. I biglietti partono da 49,00 € per il posto unico e da 59,00 € per il posto in piedi 'PIT'.",
                                     dates: "05/09/2025, ore 21:00.",
                                     address: "Ippodromo SNAI San Siro, Piazzale dello Sport, 16, Milano."
                                 },
-                                { 
-                                    name: "Salmo", 
-                                    details: "Concerto rap alla Fiera Milano Live. I biglietti per Salmo partono da 44,85 €.", 
+                                {
+                                    name: "Salmo",
+                                    details: "Concerto rap alla Fiera Milano Live. I biglietti per Salmo partono da 44,85 €.",
                                     dates: "06/09/2025.",
                                     address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
                                 },
-                                { 
-                                    name: "Emis Killa", 
-                                    details: "Il concerto di Emis Killa è in programma alla Fiera Milano Live, una delle nuove venue per la musica dal vivo.", 
+                                {
+                                    name: "Emis Killa",
+                                    details: "Il concerto di Emis Killa è in programma alla Fiera Milano Live, una delle nuove venue per la musica dal vivo.",
                                     dates: "10/09/2025.",
                                     address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
                                 },
-                                { 
-                                    name: "Sfera Ebbasta & Shiva", 
-                                    details: "Un unico spettacolo con due grandi nomi del rap italiano alla Fiera Milano Live, con biglietti a partire da 57,50 €.", 
+                                {
+                                    name: "Sfera Ebbasta & Shiva",
+                                    details: "Un unico spettacolo con due grandi nomi del rap italiano alla Fiera Milano Live, con biglietti a partire da 57,50 €.",
                                     dates: "13/09/2025, ore 21:00.",
                                     address: "Fiera Milano Live, Rho (Milano)."
                                 },
-                                { 
-                                    name: "Ghali", 
-                                    details: "Il suo show-evento 'Gran Teatro' promette uno spettacolo unico alla Fiera Milano Live, con biglietti a partire da 43,70 €.", 
+                                {
+                                    name: "Ghali",
+                                    details: "Il suo show-evento 'Gran Teatro' promette uno spettacolo unico alla Fiera Milano Live, con biglietti a partire da 43,70 €.",
                                     dates: "20/09/2025, ore 21:00.",
                                     address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milano)."
                                 },
-                                { 
-                                    name: "The Offspring", 
-                                    details: "La band punk rock si esibirà all'Unipol Forum.", 
+                                {
+                                    name: "The Offspring",
+                                    details: "La band punk rock si esibirà all'Unipol Forum.",
                                     dates: "29/09/2025.",
                                     address: "Unipol Forum, Via G. di Vittorio, 6, Assago (MI)."
                                 },
@@ -395,6 +414,116 @@
                         }
                     }
                 },
+                en: {
+                    homepage: {
+                        title: "September Guide",
+                        subtitle: "Milan",
+                        buttons: {
+                            musica: "🎵 Music & Concerts",
+                            cultura: "🏛️ Exhibitions & Culture",
+                            moda: "✨ Fashion & Design",
+                            sport: "⚽ Sports Events",
+                            insolito: "✨ Unusual & Exclusive",
+                            itinerari: "💡 Suggested Itineraries"
+                        }
+                    },
+                    pages: {
+                        musica: {
+                            title: "Music & Concerts",
+                            infoLabel: "Info:",
+                            activities: [
+                                {
+                                    name: "Tananai",
+                                    details: "The popular singer-songwriter will perform at the Ippodromo SNAI San Siro. Tickets start from €49.00 for a single seat and €59.00 for a standing 'PIT' ticket.",
+                                    dates: "05/09/2025, 9:00 PM.",
+                                    address: "Ippodromo SNAI San Siro, Piazzale dello Sport, 16, Milan."
+                                },
+                                {
+                                    name: "Salmo",
+                                    details: "Rap concert at Fiera Milano Live. Tickets for Salmo start from €44.85.",
+                                    dates: "06/09/2025.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milan)."
+                                },
+                                {
+                                    name: "Emis Killa",
+                                    details: "Emis Killa's concert is scheduled at Fiera Milano Live, one of the new live music venues.",
+                                    dates: "10/09/2025.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milan)."
+                                },
+                                {
+                                    name: "Sfera Ebbasta & Shiva",
+                                    details: "A single show with two big names in Italian rap at Fiera Milano Live, with tickets starting from €57.50.",
+                                    dates: "13/09/2025, 9:00 PM.",
+                                    address: "Fiera Milano Live, Rho (Milan)."
+                                },
+                                {
+                                    name: "Ghali",
+                                    details: "His 'Gran Teatro' show-event promises a unique spectacle at Fiera Milano Live, with tickets starting from €43.70.",
+                                    dates: "20/09/2025, 9:00 PM.",
+                                    address: "Fiera Milano Arena Concerti, Cargo 1 - Viale delle Ferrovie, Rho (Milan)."
+                                },
+                                {
+                                    name: "The Offspring",
+                                    details: "The punk rock band will perform at the Unipol Forum.",
+                                    dates: "29/09/2025.",
+                                    address: "Unipol Forum, Via G. di Vittorio, 6, Assago (MI)."
+                                },
+                                {
+                                    name: "Mito SettembreMusica",
+                                    details: "Classical music festival in various historic locations around the city. Most concerts have a cost and take place in historical venues.",
+                                    dates: "All of September.",
+                                    address: "Various locations, such as Teatro Dal Verme or Chiesa di San Giovanni Battista alla Creta."
+                                }
+                            ]
+                        },
+                        cultura: {
+                            title: "Exhibitions & Culture",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Man Ray - Forms of Light", details: "A major retrospective dedicated to one of the most eclectic geniuses of the 20th century will open at Palazzo Reale.", dates: "From 20/09/2025", address: "Palazzo Reale, Piazza del Duomo, 12, Milan." },
+                                { name: "Mario Giacomelli - The photographer and the poet", details: "A retrospective on the centenary of Giacomelli's birth concludes at Palazzo Reale.", dates: "Until 07/09/2025", address: "Palazzo Reale, Piazza del Duomo, 12, Milan." },
+                                { name: "Una Collezione Inattesa", details: "An exhibition on Italian art of the Sixties.", dates: "Until 05/10/2025", address: "Gallerie d'Italia, Piazza della Scala, 6, Milan." },
+                                { name: "Inequalities - 24ª Esposizione Internazionale", details: "An exhibition that explores global inequalities through art, design, and architecture.", dates: "Until 09/11/2025", address: "Triennale di Milano, Viale Emilio Alemagna, 6, Milan." }
+                            ]
+                        },
+                        moda: {
+                            title: "Fashion & Design",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Milan Fashion Week Women's", details: "The fashion week takes place in various locations. Some events, like those at the Fashion Hub in Palazzo Giureconsulti, are open to the public and free, but often require registration.", dates: "23 - 29 September.", address: "Diversi luoghi in città." },
+                                { name: "Milan Fashion&Jewels", details: "A trade show dedicated to accessories and jewelry.", dates: "20 - 23 September.", address: "Fiera Milano, Rho (Milan)." },
+                                { name: "Milan Beauty Week", details: "A week dedicated to perfumes, cosmetics, and wellness, with a rich calendar of events.", dates: "17 - 21 September.", address: "Varie location in città." }
+                            ]
+                        },
+                        sport: {
+                            title: "Sports Events",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Formula 1 Italian Grand Prix", details: "The Monza National Autodrome will host the 96th edition of the Grand Prix.", dates: "05 - 07 September.", address: "Autodromo Nazionale di Monza, Viale di Vedano, 5, Monza (MB)." },
+                                { name: "Giornata dello Sport", details: "A free event with the participation of various sports associations.", dates: "21 September.", address: "Parco Nord, Via Claudio Treves, 1, Cinisello Balsamo (MI)." }
+                            ]
+                        },
+                        insolito: {
+                            title: "Unusual & Exclusive",
+                            infoLabel: "Info:",
+                            activities: [
+                                { name: "Visit to Villa Necchi Campiglio", details: "An Art Deco jewel with Milan's first private swimming pool, perfect for an exclusive art experience.", dates: "Tue-Sun: 10:00 AM - 6:00 PM.", address: "Via Mozart, 14, Milano." },
+                                { name: "Underground Milan Tour", details: "Explore hidden archaeological areas, such as the Crypt of San Sepolcro or the Crypt of San Giovanni in Conca, with 90-120 minute tours. The cost starts from €33.00.", dates: "Variable, by reservation.", address: "Various locations." },
+                                { name: "Candlelight Concerts", details: "Candlelight concerts in evocative locations for an intimate and magical atmosphere.", dates: "Variable, to be checked online.", address: "Various locations, come Villa Clerici." },
+                                { name: "Bagni Misteriosi", details: "A historic redeveloped swimming pool that offers a charming, almost theatrical atmosphere. You can swim and sunbathe, with paid entry.", dates: "Variable.", address: "Via Carlo Botta, 18, Milano." },
+                                { name: "Degustazione vini privata", details: "Tour privato con un sommelier per una degustazione di vini italiani in un'enoteca esclusiva. Il costo parte da circa 88 € a persona.", dates: "Variable, su prenotazione.", address: "Vari luoghi, da definire in base alla prenotazione." }
+                            ]
+                        },
+                        itinerari: {
+                            title: "Suggested Itineraries",
+                            itineraries: [
+                                { title: "Back to Music", description: "Start the month with concerts by Salmo and Tananai, and for a trip out of town, visit the Sagra dei Crotti in Chiavenna, which celebrates local flavors and traditions." },
+                                { title: "Between Rap and Tradition", description: "An itinerary that combines the modern culture of concerts by Sfera Ebbasta & Shiva with the tradition of the Eroico Rosso wine festival in Tirano." },
+                                { title: "In the Fashion Spotlight", description: "Immerse yourself in the atmosphere of Milan Fashion Week Women's, exploring the streets of the fashion quadrilateral and attending events open to the public, subject to registration." }
+                            ]
+                        }
+                    }
+                }
             },
             nolo: {
                 it: {
@@ -505,6 +634,342 @@
                         }
                     }
                 }
+            },
+            riciclo: {
+                it: {
+                    homepage: {
+                        title: "Guida al Riciclo",
+                        subtitle: "La tua guida smart per una Milano più sostenibile.",
+                        buttons: {
+                            regole: "✨ Le Regole d'Oro",
+                            principali: "🗑️ I Contenitori Principali",
+                            speciali: "♻️ Gestione Rifiuti Speciali",
+                            buonepratiche: "💡 Buone Pratiche"
+                        }
+                    },
+                    pages: {
+                        regole: {
+                            title: "Le Regole d'Oro",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Separa", details: "Dividi sempre gli imballaggi composti da materiali diversi.", dates: "✔️" },
+                                { name: "Pulisci", details: "Sciacqua velocemente i contenitori per rimuovere i residui di cibo.", dates: "✔️" },
+                                { name: "Riduci Volume", details: "Schiaccia bottiglie di plastica, lattine e cartoni.", dates: "✔️" }
+                            ]
+                        },
+                        principali: {
+                            title: "I Contenitori Principali",
+                            infoLabel: "Cosa inserire:",
+                            activities: [
+                                { name: "🟤 ORGANICO", details: "Scarti di cucina, bucce, fondi di caffè, tovaglioli di carta usati.", dates: "(Sacco o bidone marrone)" },
+                                { name: "🟢 VETRO", details: "Solo bottiglie e vasetti di vetro. Svuota e rimuovi i tappi.", dates: "(Campana verde stradale)" },
+                                { name: "🟡 PLASTICA E METALLO", details: "Bottiglie, flaconi, vaschette, lattine, fogli di alluminio.", dates: "(Sacco giallo trasparente)" },
+                                { name: "⚪ CARTA E CARTONE", details: "Giornali, scatole, sacchetti di carta, Tetra Pak.", dates: "(Cassonetto bianco)" },
+                                { name: "🌫️ INDIFFERENZIATO", details: "Tutto ciò che non è riciclabile (scontrini, ceramica, ecc.).", dates: "(Sacco neutro trasparente)" }
+                            ]
+                        },
+                        speciali: {
+                            title: "Gestione Rifiuti Speciali",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Pile e Batterie", details: "Portale nei contenitori appositi (supermercati, negozi).", dates: "♻️" },
+                                { name: "Farmaci Scaduti", details: "Consegnali presso le farmacie.", dates: "♻️" },
+                                { name: "Olio da Cucina", details: "Raccoglilo in una bottiglia e portalo ai centri di raccolta.", dates: "♻️" },
+                                { name: "Abiti e Scarpe", details: "Nei contenitori gialli \"Dona Valore\" se in buono stato.", dates: "♻️" }
+                            ]
+                        },
+                        buonepratiche: {
+                            title: "Comportamenti Virtuosi",
+                            infoLabel: "Consiglio:",
+                            activities: [
+                                { name: "Risparmio Energetico", details: "Spegni luci ed elettrodomestici quando non li usi.", dates: "💡" },
+                                { name: "Risparmio Idrico", details: "Chiudi il rubinetto mentre ti lavi i denti e preferisci la doccia al bagno.", dates: "💡" }
+                            ]
+                        }
+                    }
+                },
+                en: {
+                    homepage: {
+                        title: "Recycling Guide",
+                        subtitle: "Your smart guide to a more sustainable Milan.",
+                        buttons: {
+                            regole: "✨ Golden Rules",
+                            principali: "🗑️ Main Bins",
+                            speciali: "♻️ Special Waste Management",
+                            buonepratiche: "💡 Good Practices"
+                        }
+                    },
+                    pages: {
+                        regole: {
+                            title: "The Golden Rules",
+                            infoLabel: "Information:",
+                            activities: [
+                                { name: "Separate", details: "Always separate packaging made of different materials.", dates: "✔️" },
+                                { name: "Clean", details: "Quickly rinse containers to remove food residue.", dates: "✔️" },
+                                { name: "Reduce Volume", details: "Crush plastic bottles, cans, and boxes.", dates: "✔️" }
+                            ]
+                        },
+                        principali: {
+                            title: "Main Bins",
+                            infoLabel: "What to put in:",
+                            activities: [
+                                { name: "🟤 ORGANIC", details: "Cooked and raw food scraps, peels, coffee grounds, used paper towels.", dates: "(Brown bin or bag)" },
+                                { name: "🟢 GLASS", details: "Only glass bottles and jars. Empty and remove caps.", dates: "(Green street bin)" },
+                                { name: "🟡 PLASTICA & METAL", details: "Bottles, containers, trays, cans, aluminum foil.", dates: "(Transparent yellow bag)" },
+                                { name: "⚪ PAPER & CARDBOARD", details: "Newspapers, boxes, paper bags, Tetra Pak.", dates: "(White bin)" },
+                                { name: "🌫️ UNSORTED", details: "Anything that cannot be recycled (receipts, ceramics, etc.).", dates: "(Transparent neutral bag)" }
+                            ]
+                        },
+                        speciali: {
+                            title: "Special Waste Management",
+                            infoLabel: "Information:",
+                            activities: [
+                                { name: "Batteries", details: "Take them to special collection points (supermarkets, shops).", dates: "♻️" },
+                                { name: "Expired Medicine", details: "Return them to pharmacies.", dates: "♻️" },
+                                { name: "Cooking Oil", details: "Collect it in a bottle and take it to a collection center.", dates: "♻️" },
+                                { name: "Clothes & Shoes", details: "Use the yellow \"Dona Valore\" bins if in good condition.", dates: "♻️" }
+                            ]
+                        },
+                        buonepratiche: {
+                            title: "Good Practices",
+                            infoLabel: "Tip:",
+                            activities: [
+                                { name: "Energy Saving", details: "Turn off lights and appliances when not in use.", dates: "💡" },
+                                { name: "Water Saving", details: "Turn off the tap while brushing your teeth and prefer showers.", dates: "💡" }
+                            ]
+                        }
+                    }
+                }
+            },
+            servizi: {
+                it: {
+                    homepage: {
+                        title: "Intorno a te",
+                        subtitle: "Servizi e numeri utili per il tuo soggiorno.",
+                        buttons: {
+                            apartments: "🏠 Servizi per Appartamento",
+                            general: "☎️ Numeri Utili Generali",
+                            consulates: "🌍 Consolati e Ambasciate"
+                        }
+                    },
+                    pages: {
+                        apartments: {
+                            title: "Servizi per Appartamento",
+                            infoLabel: "Dettagli:",
+                            activities: [
+                                { name: "The NoLo Heritage Studio", details: "Via Termopili 29, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Rovereto (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Esterle”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Suite Apartment – Urban & Bright", details: "Via Bassano del Grappa 32, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Pasteur”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Nest – Compact Comfort", details: "Via Bassano del Grappa 32, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Pasteur”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The MASOTTO Terrace – City View Apartment", details: "Via Umberto Masotto 4, Milano", listItems: ["Pronto soccorso: IRCCS San Raffaele – Via Olgettina 60 – Tel. 02 26431", "Ospedale: IRCCS San Raffaele – Via Olgettina 60 – Tel. 02 26431", "Posta: Poste Italiane – Via Castel Morrone 2/B – Tel. 02 7385716", "Farmacia: Farmacia Argonne – Via Umberto Masotto 1 – Tel. 02 70106319", "Supermercato: Pam Local – Via Gaspare Aselli 7 – Tel. 02 36798351", "Fermata metro: Argonne (M4)", "Fermata bus: Linea 38 – “Susa M4 / Argonne M4”", "Stazione taxi: Posteggio “Romagna” – Viale Romagna 76 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Studio – Vibrant Livin", details: "Via Giorgio Chavez 1, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Chavez”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] }
+                            ]
+                        },
+                        general: {
+                            title: "General Useful Numbers",
+                            infoLabel: "Details:",
+                            activities: [
+                                { name: "European Single Emergency (all emergencies)", details: "Single number for all emergencies (Police, Firefighters, Medical Emergency).", dates: "☎️ 112" },
+                                { name: "State Police", details: "To report crimes and request police assistance.", dates: "☎️ 113" },
+                                { name: "Fire Department", details: "For emergencies related to fires, rescues, and accidents.", dates: "☎️ 115" },
+                                { name: "Medical Emergency", details: "To call an ambulance and request urgent medical help.", dates: "☎️ 118" },
+                                { name: "Emergency Doctor (Milano)", details: "Assistance service for non-urgent health issues that occur at night, on holidays, and on the day before holidays.", dates: "☎️ 800 193 344" },
+                                { name: "Radio Taxi", details: "To call a taxi at any time.", dates: "☎️ 02 4040 · 02 8585 · 02 6969" }
+                            ]
+                        },
+                        consulates: {
+                            title: "Consulates and Embassies",
+                            infoLabel: "Details:",
+                            activities: [
+                                { name: "Romania – Consulate General", details: "Via Gignese 2", dates: "Tel. 02 4009 8350" },
+                                { name: "Poland – Consulate General", details: "Via Monte Rosa 6", dates: "Tel. 02 4855 5162" },
+                                { name: "Albania – Consulate General", details: "Viale Abruzzi 2", dates: "Tel. 02 7063 2353" },
+                                { name: "Ukraine – Consulate General", details: "Via Ludovico di Breme 11", dates: "Tel. 02 2951 5024" },
+                                { name: "Russia – Consulate General", details: "Via Sant’Aquilino 3", dates: "Tel. 02 4801 5444" },
+                                { name: "Hungary – Consulate General", details: "Via Vincenzo Monti 47", dates: "Tel. 02 4801 0036" },
+                                { name: "Serbia – Consulate General", details: "Viale Corsica 41", dates: "Tel. 02 7389 0248" },
+                                { name: "Brazil – Consulate General", details: "Corso Europa 12 – Email: informa@consbrasmilao.it", dates: "Tel. 02 777 1071" },
+                                { name: "Argentina – Consulate General", details: "Via Agnello 2", dates: "Tel. 02 7772 9420 · 02 7772 9401" },
+                                { name: "Colombia – Consulate General", details: "Via Tivoli 3", dates: "Tel. 02 7200 3872 · 02 8051 765" },
+                                { name: "Cuba – Consulate General", details: "Via Gaspare Gozzi 5", dates: "Tel. 02 6739 1344" },
+                                { name: "Israel – Embassy in Rome", details: "Via Michele Mercati 14 (no consulate in Milan)", dates: "Tel. 06 3619 8500" },
+                                { name: "Canada – Consolato / Ufficio Consolare", details: "Via Verziere 11 – Email: consul.milan@international.gc.ca", dates: "Alternativa: Piazza Cavour 3 – Tel. 02 6269 4238" },
+                                { name: "Stati Uniti – Consolato Generale", details: "Via Principe Amedeo 2/10", dates: "Tel. 02 290351" },
+                                { name: "Francia – Consolato Generale", details: "Via Mangili 1", dates: "Tel. 02 6555721" },
+                                { name: "Germania – Consolato Generale", details: "Via Solferino 40", dates: "Tel. 02 6231101" },
+                                { name: "Spagna – Consolato Generale", details: "Via Fatebenefratelli 26", dates: "Tel. 02 632881" },
+                                { name: "Regno Unito – Consolato Generale", details: "Via San Paolo 7", dates: "Tel. 02 723001" }
+                            ]
+                        }
+                    }
+                }
+            },
+            riciclo: {
+                it: {
+                    homepage: {
+                        title: "Guida al Riciclo",
+                        subtitle: "La tua guida smart per una Milano più sostenibile.",
+                        buttons: {
+                            regole: "✨ Le Regole d'Oro",
+                            principali: "🗑️ I Contenitori Principali",
+                            speciali: "♻️ Gestione Rifiuti Speciali",
+                            buonepratiche: "💡 Buone Pratiche"
+                        }
+                    },
+                    pages: {
+                        regole: {
+                            title: "Le Regole d'Oro",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Separa", details: "Dividi sempre gli imballaggi composti da materiali diversi.", dates: "✔️" },
+                                { name: "Pulisci", details: "Sciacqua velocemente i contenitori per rimuovere i residui di cibo.", dates: "✔️" },
+                                { name: "Riduci Volume", details: "Schiaccia bottiglie di plastica, lattine e cartoni.", dates: "✔️" }
+                            ]
+                        },
+                        principali: {
+                            title: "I Contenitori Principali",
+                            infoLabel: "Cosa inserire:",
+                            activities: [
+                                { name: "🟤 ORGANICO", details: "Scarti di cucina, bucce, fondi di caffè, tovaglioli di carta usati.", dates: "(Sacco o bidone marrone)" },
+                                { name: "🟢 VETRO", details: "Solo bottiglie e vasetti di vetro. Svuota e rimuovi i tappi.", dates: "(Campana verde stradale)" },
+                                { name: "🟡 PLASTICA E METALLO", details: "Bottiglie, flaconi, vaschette, lattine, fogli di alluminio.", dates: "(Sacco giallo trasparente)" },
+                                { name: "⚪ CARTA E CARTONE", details: "Giornali, scatole, sacchetti di carta, Tetra Pak.", dates: "(Cassonetto bianco)" },
+                                { name: "🌫️ INDIFFERENZIATO", details: "Tutto ciò che non è riciclabile (scontrini, ceramica, ecc.).", dates: "(Sacco neutro trasparente)" }
+                            ]
+                        },
+                        speciali: {
+                            title: "Gestione Rifiuti Speciali",
+                            infoLabel: "Informazioni:",
+                            activities: [
+                                { name: "Pile e Batterie", details: "Portale nei contenitori appositi (supermercati, negozi).", dates: "♻️" },
+                                { name: "Farmaci Scaduti", details: "Consegnali presso le farmacie.", dates: "♻️" },
+                                { name: "Olio da Cucina", details: "Raccoglilo in una bottiglia e portalo ai centri di raccolta.", dates: "♻️" },
+                                { name: "Abiti e Scarpe", details: "Nei contenitori gialli \"Dona Valore\" se in buono stato.", dates: "♻️" }
+                            ]
+                        },
+                        buonepratiche: {
+                            title: "Comportamenti Virtuosi",
+                            infoLabel: "Consiglio:",
+                            activities: [
+                                { name: "Risparmio Energetico", details: "Spegni luci ed elettrodomestici quando non li usi.", dates: "💡" },
+                                { name: "Risparmio Idrico", details: "Chiudi il rubinetto mentre ti lavi i denti e preferisci la doccia al bagno.", dates: "💡" }
+                            ]
+                        }
+                    }
+                },
+                en: {
+                    homepage: {
+                        title: "Recycling Guide",
+                        subtitle: "Your smart guide to a more sustainable Milan.",
+                        buttons: {
+                            regole: "✨ Golden Rules",
+                            principali: "🗑️ Main Bins",
+                            speciali: "♻️ Special Waste Management",
+                            buonepratiche: "💡 Good Practices"
+                        }
+                    },
+                    pages: {
+                        regole: {
+                            title: "The Golden Rules",
+                            infoLabel: "Information:",
+                            activities: [
+                                { name: "Separate", details: "Always separate packaging made of different materials.", dates: "✔️" },
+                                { name: "Clean", details: "Quickly rinse containers to remove food residue.", dates: "✔️" },
+                                { name: "Reduce Volume", details: "Crush plastic bottles, cans, and boxes.", dates: "✔️" }
+                            ]
+                        },
+                        principali: {
+                            title: "Main Bins",
+                            infoLabel: "What to put in:",
+                            activities: [
+                                { name: "🟤 ORGANIC", details: "Cooked and raw food scraps, peels, coffee grounds, used paper towels.", dates: "(Brown bin or bag)" },
+                                { name: "🟢 GLASS", details: "Only glass bottles and jars. Empty and remove caps.", dates: "(Green street bin)" },
+                                { name: "🟡 PLASTICA & METAL", details: "Bottles, containers, trays, cans, aluminum foil.", dates: "(Transparent yellow bag)" },
+                                { name: "⚪ PAPER & CARDBOARD", details: "Newspapers, boxes, paper bags, Tetra Pak.", dates: "(White bin)" },
+                                { name: "🌫️ UNSORTED", details: "Anything that cannot be recycled (receipts, ceramics, etc.).", dates: "(Transparent neutral bag)" }
+                            ]
+                        },
+                        speciali: {
+                            title: "Special Waste Management",
+                            infoLabel: "Information:",
+                            activities: [
+                                { name: "Batteries", details: "Take them to special collection points (supermarkets, shops).", dates: "♻️" },
+                                { name: "Expired Medicine", details: "Return them to pharmacies.", dates: "♻️" },
+                                { name: "Cooking Oil", details: "Collect it in a bottle and take it to a collection center.", dates: "♻️" },
+                                { name: "Clothes & Shoes", details: "Use the yellow \"Dona Valore\" bins if in good condition.", dates: "♻️" }
+                            ]
+                        },
+                        buonepratiche: {
+                            title: "Good Practices",
+                            infoLabel: "Tip:",
+                            activities: [
+                                { name: "Energy Saving", details: "Turn off lights and appliances when not in use.", dates: "💡" },
+                                { name: "Water Saving", details: "Turn off the tap while brushing your teeth and prefer showers.", dates: "💡" }
+                            ]
+                        }
+                    }
+                }
+            },
+            servizi: {
+                it: {
+                    homepage: {
+                        title: "Intorno a te",
+                        subtitle: "Servizi e numeri utili per il tuo soggiorno.",
+                        buttons: {
+                            apartments: "🏠 Servizi per Appartamento",
+                            general: "☎️ Numeri Utili Generali",
+                            consulates: "🌍 Consolati e Ambasciate"
+                        }
+                    },
+                    pages: {
+                        apartments: {
+                            title: "Servizi per Appartamento",
+                            infoLabel: "Dettagli:",
+                            activities: [
+                                { name: "The NoLo Heritage Studio", details: "Via Termopili 29, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Rovereto (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Esterle”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Suite Apartment – Urban & Bright", details: "Via Bassano del Grappa 32, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Pasteur”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Nest – Compact Comfort", details: "Via Bassano del Grappa 32, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Pasteur”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The MASOTTO Terrace – City View Apartment", details: "Via Umberto Masotto 4, Milano", listItems: ["Pronto soccorso: IRCCS San Raffaele – Via Olgettina 60 – Tel. 02 26431", "Ospedale: IRCCS San Raffaele – Via Olgettina 60 – Tel. 02 26431", "Posta: Poste Italiane – Via Castel Morrone 2/B – Tel. 02 7385716", "Farmacia: Farmacia Argonne – Via Umberto Masotto 1 – Tel. 02 70106319", "Supermercato: Pam Local – Via Gaspare Aselli 7 – Tel. 02 36798351", "Fermata metro: Argonne (M4)", "Fermata bus: Linea 38 – “Susa M4 / Argonne M4”", "Stazione taxi: Posteggio “Romagna” – Viale Romagna 76 – Tel. 02 4040 · 02 8585 · 02 6969"] },
+                                { name: "The NoLo Studio – Vibrant Livin", details: "Via Giorgio Chavez 1, Milano", listItems: ["Pronto soccorso: Ospedale Maggiore Policlinico – Via San Barnaba 8 – Tel. 02 5503 6686", "Ospedale: G.O.M. Niguarda – Piazza Ospedale Maggiore 3 – Tel. 02 64441", "Posta: Poste Italiane – Via Giuseppe Pecchio 1 – Tel. 02 6424982", "Farmacia: Farmacia Pavesio – Via Giorgio Chavez 19 – Tel. 02 26820434", "Supermercato: Carrefour Market – Viale Monza 134 – Tel. 02 2828564", "Fermata metro: Pasteur (M1)", "Fermata bus: Linea 56 – “Via Padova / Via Chavez”", "Stazione taxi: Posteggio “Loreto/A. Costa” – Piazzale Loreto 5 – Tel. 02 4040 · 02 8585 · 02 6969"] }
+                            ]
+                        },
+                        general: {
+                            title: "General Useful Numbers",
+                            infoLabel: "Details:",
+                            activities: [
+                                { name: "European Single Emergency (all emergencies)", details: "Single number for all emergencies (Police, Firefighters, Medical Emergency).", dates: "☎️ 112" },
+                                { name: "State Police", details: "To report crimes and request police assistance.", dates: "☎️ 113" },
+                                { name: "Fire Department", details: "For emergencies related to fires, rescues, and accidents.", dates: "☎️ 115" },
+                                { name: "Medical Emergency", details: "To call an ambulance and request urgent medical help.", dates: "☎️ 118" },
+                                { name: "Emergency Doctor (Milano)", details: "Assistance service for non-urgent health issues that occur at night, on holidays, and on the day before holidays.", dates: "☎️ 800 193 344" },
+                                { name: "Radio Taxi", details: "To call a taxi at any time.", dates: "☎️ 02 4040 · 02 8585 · 02 6969" }
+                            ]
+                        },
+                        consulates: {
+                            title: "Consulates and Embassies",
+                            infoLabel: "Details:",
+                            activities: [
+                                { name: "Romania – Consulate General", details: "Via Gignese 2", dates: "Tel. 02 4009 8350" },
+                                { name: "Poland – Consulate General", details: "Via Monte Rosa 6", dates: "Tel. 02 4855 5162" },
+                                { name: "Albania – Consulate General", details: "Viale Abruzzi 2", dates: "Tel. 02 7063 2353" },
+                                { name: "Ukraine – Consulate General", details: "Via Ludovico di Breme 11", dates: "Tel. 02 2951 5024" },
+                                { name: "Russia – Consulate General", details: "Via Sant’Aquilino 3", dates: "Tel. 02 4801 5444" },
+                                { name: "Hungary – Consulate General", details: "Via Vincenzo Monti 47", dates: "Tel. 02 4801 0036" },
+                                { name: "Serbia – Consulate General", details: "Viale Corsica 41", dates: "Tel. 02 7389 0248" },
+                                { name: "Brazil – Consulate General", details: "Corso Europa 12 – Email: informa@consbrasmilao.it", dates: "Tel. 02 777 1071" },
+                                { name: "Argentina – Consulate General", details: "Via Agnello 2", dates: "Tel. 02 7772 9420 · 02 7772 9401" },
+                                { name: "Colombia – Consulate General", details: "Via Tivoli 3", dates: "Tel. 02 7200 3872 · 02 8051 765" },
+                                { name: "Cuba – Consulate General", details: "Via Gaspare Gozzi 5", dates: "Tel. 02 6739 1344" },
+                                { name: "Israel – Embassy in Rome", details: "Via Michele Mercati 14 (no consulate in Milan)", dates: "Tel. 06 3619 8500" },
+                                { name: "Canada – Consolato / Ufficio Consolare", details: "Via Verziere 11 – Email: consul.milan@international.gc.ca", dates: "Alternativa: Piazza Cavour 3 – Tel. 02 6269 4238" },
+                                { name: "Stati Uniti – Consolato Generale", details: "Via Principe Amedeo 2/10", dates: "Tel. 02 290351" },
+                                { name: "Francia – Consolato Generale", details: "Via Mangili 1", dates: "Tel. 02 6555721" },
+                                { name: "Germania – Consolato Generale", details: "Via Solferino 40", dates: "Tel. 02 6231101" },
+                                { name: "Spagna – Consolato Generale", details: "Via Fatebenefratelli 26", dates: "Tel. 02 632881" },
+                                { name: "Regno Unito – Consolato Generale", details: "Via San Paolo 7", dates: "Tel. 02 723001" }
+                            ]
+                        }
+                    }
+                }
             }
         };
 
@@ -532,24 +997,29 @@
                     subtitle: "Scegli l'esperienza perfetta per te",
                     ristoranti: "🍽️ Guida Ristoranti",
                     settembre: "📅 Guida Settembre",
-                    nolo: "🗺️ Mappa di NoLo"
+                    nolo: "🗺️ Mappa di NoLo",
+                    servizi: "🗺️ Intorno a te",
+                    riciclo: "♻️ Guida al Riciclo"
                 },
                 en: {
                     title: "Milan Guide",
                     subtitle: "Choose your perfect experience",
                     ristoranti: "🍽️ Restaurant Guide",
                     settembre: "📅 September Guide",
-                    nolo: "🗺️ NoLo Map"
+                    nolo: "🗺️ NoLo Map",
+                    servizi: "🗺️ Around You",
+                    riciclo: "♻️ Recycling Guide"
                 }
             };
             
-            document.getElementById('logo-container').innerHTML = logoHtml;
             const textData = welcomeText[currentLang];
             document.getElementById('welcome-title').innerText = textData.title;
             document.getElementById('welcome-subtitle').innerText = textData.subtitle;
             document.getElementById('btn-ristoranti').innerText = textData.ristoranti;
             document.getElementById('btn-settembre').innerText = textData.settembre;
             document.getElementById('btn-nolo').innerText = textData.nolo;
+            document.getElementById('btn-servizi').innerText = textData.servizi;
+            document.getElementById('btn-riciclo').innerText = textData.riciclo;
         }
 
         function updateGuideUI() {
@@ -561,7 +1031,7 @@
             let content = `
                 <div class="p-6 bg-white min-h-screen">
                     <header class="flex items-center mb-6 pb-4 border-b">
-                        <button onclick="showWelcomePage()" style="color:var(--magenta);" class="font-bold text-lg mr-4">${backButtonText}</button>
+                        <button onclick="showWelcomePage()" style="color:var(--ottanio);" class="font-bold text-lg mr-4">${backButtonText}</button>
                         <div class="flex items-center gap-4">
                             <div id="logo-container-guide">${logoHtml}</div>
                             <h2 class="text-2xl font-bold text-ottanio">${guideData.homepage.title}</h2>
@@ -574,11 +1044,14 @@
                     const buttonText = guideData.homepage.buttons[key];
                     
                     let buttonClass = 'btn-category';
-                    if (key.includes('itinerari') || key.includes('suggerimenti')) {
+                    if (key.includes('itinerari') || key.includes('suggerimenti') || key.includes('regole') || key.includes('buonepratiche')) {
                         buttonClass = 'btn-suggestion';
-                    } else if (key.includes('vegani') || key.includes('insolito')) {
-                        buttonClass = 'btn-vegan';
+                    } else if (key.includes('vegani') || key.includes('insolito') || key.includes('principali') || key.includes('speciali')) {
+                        buttonClass = 'btn-special';
+                    } else if (key.includes('riciclo') || key.includes('servizi')) {
+                        buttonClass = 'btn-special';
                     }
+
 
                     content += `<button onclick="showPage('${key}')" class="w-full btn font-bold py-5 rounded-lg shadow-md text-lg ${buttonClass}">${buttonText}</button>`;
                 }
@@ -606,12 +1079,12 @@
                 mainContent = `<div class="p-4 text-center">Nessun contenuto disponibile.</div>`;
             }
 
-            const backButtonText = currentGuide === 'nolo' ? "← Torna a NoLo" : "← Torna alla Home";
+            const backButtonText = currentLang === 'it' ? "← Torna indietro" : "← Go back";
 
             const content = `
                 <div class="p-6 bg-white min-h-screen">
                     <header class="flex items-center mb-6 pb-4 border-b">
-                        <button onclick="updateGuideUI()" style="color:var(--magenta);" class="font-bold text-lg mr-4">${backButtonText}</button>
+                        <button onclick="updateGuideUI()" style="color:var(--ottanio);" class="font-bold text-lg mr-4">${backButtonText}</button>
                         <h2 class="text-2xl font-bold text-ottanio">${data.title}</h2>
                     </header>
                     <main>
@@ -623,21 +1096,34 @@
         }
 
         function createActivityCard(activity) {
+            let detailsHtml;
             const infoLabel = allGuidesData[currentGuide][currentLang].pages[Object.keys(allGuidesData[currentGuide][currentLang].pages)[0]].infoLabel;
-            const addressHtml = activity.address ? `<p class="mt-2"><strong class="font-semibold">Indirizzo:</strong> ${activity.address}</p>` : '';
+            
+            if (activity.listItems) {
+                detailsHtml = `
+                    <p class="font-semibold text-base mb-2">${activity.details}</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        ${activity.listItems.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                const addressHtml = activity.address ? `<p class="mt-2"><strong class="font-semibold">Indirizzo:</strong> ${activity.address}</p>` : '';
+                detailsHtml = `<p class="text-sm font-semibold">${infoLabel}</p><p class="mt-1">${activity.details}</p>${addressHtml}`;
+            }
+
             return `
-                <div class="card bg-white border-l-4 border-l-[var(--magenta)] rounded-r-lg p-4 mb-4 shadow-sm">
-                    <div class="flex justify-between items-start">
+                <div class="card bg-white border-l-4 border-l-[var(--verde)] rounded-r-lg p-4 mb-4 shadow-sm">
+                    <div class="flex justify-between items-start mb-2">
                         <h3 class="font-bold text-xl text-ottanio">${activity.name}</h3>
-                        <span class="text-sm font-semibold text-magenta bg-gray-100 px-2 py-1 rounded-full" style="color:var(--magenta); background-color: var(--light-magenta);">${activity.dates}</span>
+                        ${activity.dates ? `<span class="text-sm font-semibold text-magenta bg-gray-100 px-2 py-1 rounded-full" style="color: var(--magenta); background-color: var(--light-magenta);">${activity.dates}</span>` : ''}
                     </div>
                     <div class="bg-gray-50 p-3 rounded-md text-ottanio mt-3">
-                        <p><strong class="font-semibold">${infoLabel}</strong> ${activity.details}</p>
-                        ${addressHtml}
+                        ${detailsHtml}
                     </div>
                 </div>
             `;
         }
+
 
         function createItineraryCard(itinerary) {
             return `
